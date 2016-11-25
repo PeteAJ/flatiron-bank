@@ -6,6 +6,7 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       t.text :description
       t.integer :account_balance
       t.integer :account_id
+      t.timestamps null: false
     end
   end
 end
