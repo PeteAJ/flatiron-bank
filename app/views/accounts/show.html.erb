@@ -2,3 +2,34 @@
 
 <%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back', accounts_path %>
+
+<h3><%=flash[:notice]%></h3>
+<h3>Account: <%=@account.name%></h3>
+<button><a href="/accounts/<%=@account.id%>/edit">Edit Account Name</a></button>
+<p>Balance: $<%=@account.balance%></p>
+
+<form action="/accounts/<%=@account.id%>/new_transaction" method="post">
+
+    <label>Choose Deposit or Withdrawl</label>
+    <br/>
+    <select name="transaction_type" id="transaction_type">
+      <option tag="deposit" id="deposit" value="deposit">Deposit</option>
+      <option tag="withdrawl" id="withdrawl" value="withdrawl">Withdrawl</option>
+    </select>
+    <input type="integer" name="transaction_amount" placeholder="amount">
+    <br/>
+    <input type="submit" value="Create New Transaction">
+  </form>
+
+<br/>
+<br/>
+<br/>
+
+<label>Transactions for this Account</label>
+<p><%current_client.transactions.each do |transaction|%></p>
+<p style="display:inline">Date: <%=transaction.created_at%></p>
+  <p style="display:inline">Kind: <%=transaction.description%></p>
+  <p style="display:inline">Amount: $<%=transaction.amount%></p>
+<%end%>
+
+<h4><a href="/accounts/new">Create an Additional Account</a></h4>

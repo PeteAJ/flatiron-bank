@@ -4,3 +4,14 @@
 
 <%= link_to 'Show', @account %> |
 <%= link_to 'Back', accounts_path %>
+
+
+<h1> Update An Account Name</h1>
+
+<form method="post" action="/accounts/<%=@account.id%>">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  Name<input id="name" type="text" value="<%=@account.name%>" name="name">
+  <br/>
+
+  <input type="submit" value="submit">
+</form>

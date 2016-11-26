@@ -3,3 +3,23 @@
 <%= render 'form', account: @account %>
 
 <%= link_to 'Back', accounts_path %>
+
+<h1>Create a new Account</h1>
+
+<form action="/accounts" method="POST">
+
+  <label>Name</label>
+  <br/>
+  <input type="text" name="name" id="name" placeholder="name">
+  <br/>
+  <label>Opening Deposit</label>
+  <label>Please Create Your Account with a $50 Minimum Opening Deposit</label>
+  <br/>
+  <input type="integer" name="initial_deposit" id="initial_deposit" placeholder="opening deposit">
+  <br/>
+  <label>Overdraft Protection ($200 Limit)</label>
+  <br/>
+  <input type="checkbox" name="overdraft_protection" id="overdraft_protection">
+  <br/>
+  <input type="submit" value="Create Account">
+</form>
