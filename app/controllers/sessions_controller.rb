@@ -1,7 +1,6 @@
 require "./config/environment"
 require "./app/models/client"
 
-
 class SessionsController < ApplicationController
 
   def signup
