@@ -2,3 +2,48 @@
 
 <%= link_to 'Edit', edit_client_path(@client) %> |
 <%= link_to 'Back', clients_path %>
+
+
+<h1>Hello <%=@client.name%></h1><h1>Email: <%=@client.email%></h1>
+<br/>
+<h2>Here are Your Account Summaries:</h2>
+<ul>
+  <%current_client.accounts.each do |account|%>
+  <a href="/accounts/<%=account.id%>">
+    <h3><%=account.name%></h3>
+  </a>
+  <p><%=account.balance%></p>
+  <%end%>
+</ul>
+<br/>
+
+<h2>Please choose an account to view:</h2>
+<br/>
+<form action="/clients/<%=@client.id%>" method="get">
+  <select name="account[id]">
+    <option>Choose Account</option>
+    <% current_client.accounts.each do |account| %>
+
+      <option value="<%=account.id%>"><%=account.name%></option>
+    <% end %>
+  </select>
+  <input type="submit" value="submit">
+</form>
+
+<% if @account %>
+  <a href="/accounts/<%=@account.id%>">
+  <h1><%= @account.name %></h1></a>
+  <p>
+    <%= @account.balance %>
+  </p>
+<% end %>
+
+
+
+<br/>
+<br/>
+<a href="/accounts/new">Create an Additional Account</a>
+<br/>
+<a href="/accounts/<%=@client.id%>">Account Transfers</a>
+<br/>
+<a href="/clients/<%=@client.id%>/edit">Edit Your Contact Email</a>
