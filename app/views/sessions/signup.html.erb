@@ -1,18 +1,11 @@
-<h1>Please sign up using the form below:</h1>
+<h2>Please sign up using the form below:</h2>
 
-<form action='/registrations' method="POST">
+<%= form_tag("/registrations") do %>
   <h4><%=flash[:notice]%></h4>
-  <label>name</label>
+  <h4><%=flash[:notice]%></h4>
+  Name: <br/><%= text_field_tag "name" %><br/>
+  Email: <br/><%= text_field_tag "email" %><br/>
+  Password:<br/><%= text_field_tag "password" %>
   <br/>
-  <input type="text" name="name" placeholder="name">
-  <br/>
-  <label>email</label>
-  <br/>
-  <input type="text" name="email" placeholder="email">
-  <br/>
-  <label>password</label>
-  <br/>
-  <input type="password" name="password" placeholder="password">
-  <br/>
-  <input type="submit" value="Sign Up">
-</form>
+  <%= submit_tag "Sign Up" %>
+<% end %>
