@@ -1,6 +1,6 @@
 <h2>Please sign in using the form below:</h2>
 
-<%= form_tag("/sessions") do %>
+<%= form_tag("/") do %>
   <h4><%=flash[:notice]%></h4>
   Email: <br/><%= text_field_tag "email" %><br>
   Password:<br/><%= text_field_tag "password" %>

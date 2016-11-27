@@ -42,10 +42,11 @@ class AccountsController < ApplicationController
     #@account = Account.new(account_params)
     if params[:initial_deposit].to_i < 50
       else
-    @account = Account.create(name: params[:name], :overdraft_protection => params[:overdraft_protection])
+    @account = Account.create(account_params)
     @account.balance = params[:initial_deposit]
     @account.client_id = current_client.id
     @account.save
+    redirect_to accounts_path
 
     #respond_to do |format|
     #  if @account.save
@@ -169,6 +170,7 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.fetch(:account, {})
+      params.fetch(:account, {name: params[:name], :overdraft_protection => params[:overdraft_protection]
+    })
     end
 end
