@@ -47,7 +47,7 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1.json
   def update
     @client = Client.find(params[:id])
-    @client.update(email: params[:email])
+    @client.update(params.require(:email))
     redirect_to client_path(@client)
 
 

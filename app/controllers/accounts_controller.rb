@@ -38,6 +38,7 @@ class AccountsController < ApplicationController
   def create
     #@account = Account.new(account_params)
     if params[:initial_deposit].to_i < 50
+      "*You must create an account with at least $50!*"
       else
     @account = Account.create(account_params)
     @account.balance = params[:initial_deposit]
@@ -61,7 +62,7 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1.json
   def update
     @account = Account.find(params[:id])
-    @account.update(name: params[:name])
+    @account.update(params.require(:name))
     redirect_to account_path(@account)
 
     #respond_to do |format|
