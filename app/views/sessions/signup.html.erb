@@ -1,11 +1,10 @@
 <h2>Please sign up using the form below:</h2>
 
-<%= form_tag("/registrations") do %>
+<%= form_tag clients_path do %>
   <h4><%=flash[:notice]%></h4>
-  <h4><%=flash[:notice]%></h4>
-  Name: <br/><%= text_field_tag "name" %><br/>
-  Email: <br/><%= text_field_tag "email" %><br/>
-  Password:<br/><%= text_field_tag "password" %>
+  Name: <br/><%= text_field_tag :'name' %><br/>
+  Email: <br/><%= text_field_tag :'email' %><br/>
+  Password:<br/><%= text_field_tag :'password' %>
   <br/>
   <%= submit_tag "Sign Up" %>
 <% end %>

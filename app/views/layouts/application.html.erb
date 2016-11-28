@@ -16,7 +16,7 @@
   <nav>
        <a href="/"> Home </a>
      <% if logged_in? %>
-       <a href="/sessions/logout"> Log Out </a>
+       <a href="/logout"> Log Out </a>
        <a href="/clients/<%=current_client.id%>"> Account Summary </a>
      <% else %>
        <a href="/signup">Sign Up</a>

@@ -7,10 +7,10 @@ class SessionsController < ApplicationController
     if params[:name] == "" || params[:email] == "" || params[:password] == ""
       render "signup"
     else
-    @client = Client.new(params)
+    @client = Client.new(params[:id])
     if @client.save
     session[:client_id] = @client.id
-    redirect_to "/accounts_path"
+    redirect_to client_path(@client)
     else
     flash[:notice] = "Please enter name, email and password."
       render "signup"

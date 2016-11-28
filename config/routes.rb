@@ -6,5 +6,6 @@ resources :accounts, :clients
 get 'signup', to: 'sessions#signup'
 get 'login', to: 'sessions#login'
 
-post '/clients/:id', to: 'sessions#sessions'
+post '/clients/:id', to: 'sessions#registrations', as: 'signed-up'
+post '/clients/:id', to: 'sessions#sessions', as: 'logged-in'
 end
