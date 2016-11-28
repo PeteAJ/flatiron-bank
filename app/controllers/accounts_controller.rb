@@ -44,7 +44,7 @@ class AccountsController < ApplicationController
     @account.balance = params[:initial_deposit]
     @account.client_id = current_client.id
     @account.save
-    redirect_to accounts_path
+    redirect_to account_path(@account)
 
     #respond_to do |format|
     #  if @account.save
@@ -62,7 +62,7 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1.json
   def update
     @account = Account.find(params[:id])
-    @account.update(params.require(:name))
+    @account.update(account_params)
     redirect_to account_path(@account)
 
     #respond_to do |format|
@@ -168,7 +168,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.fetch(:account, {name: params[:name], :overdraft_protection => params[:overdraft_protection]
-    })
+      params.require(:account).permit(:name, :balance, :overdraft_protection, :client_id)
     end
 end
