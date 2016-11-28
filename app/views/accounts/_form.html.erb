@@ -1,17 +1,19 @@
-<%= form_for(account) do |f| %>
-  <% if account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
+<h1>Create a new Account</h1>
 
-      <ul>
-      <% account.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= form_tag('/accounts') do %>
+  <label>Name</label>
+  <br/>
+  Name: <br/><%= text_field_tag "name" %><br/>
+  <br/>
+  <label>Opening Deposit</label>
+  <label>Please Create Your Account with a $50 Minimum Opening Deposit</label>
+  <br/>
+  Opening Deposit: <br/><%= number_field_tag "initial_deposit" %><br/>
+  <br/>
+  <label>Overdraft Protection ($200 Limit)</label>
+  <br/>
+  <input type="checkbox" name="overdraft_protection" id="overdraft_protection">
+  <br/>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%= submit_tag "Create Account" %>
 <% end %>
