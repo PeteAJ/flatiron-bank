@@ -9,7 +9,7 @@
 <h1> Update An Account Name</h1>
 
   <%= form_tag accounts_path do %>
-  Name: <br/><%= text_field_tag "name" %><br/>
+  Name: <br/><%= text_field_tag :name, @account.name %><br/>
   <br/>
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   <%= submit_tag "Edit Account" %>
