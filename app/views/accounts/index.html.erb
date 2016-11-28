@@ -52,7 +52,7 @@ Account to Name: <br/><%= text_field_tag "account_to_name" %><br/>
 <br/>
 <label>Amount to Transfer</label>
 <br/>
-Amount to Transfer: <br/><%= text_field_tag "transaction_amount" %><br/>
+Amount to Transfer: <br/><%= number_field_tag "transaction_amount" %><br/>
 
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 <%= submit_tag "Transfer" %>
@@ -80,7 +80,7 @@ Name of the Outside Account You'd Like to Transfer to: <br/><%= text_field_tag "
 <br/>
 <label>Amount to Transfer</label>
 <br/>
-Amount to Transfer: <br/><%= text_field_tag "transaction_amount" %><br/>
+Amount to Transfer: <br/><%= number_field_tag "transaction_amount" %><br/>
 
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 <%= submit_tag "Transfer" %>
