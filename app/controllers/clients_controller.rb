@@ -46,9 +46,12 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
-    @client = Client.find_by_id(params[:id])
-    @client.email = params[:email]
-    @client.save
+    @client = Client.find(params[:id])
+    @client.update(email: params[:email])
+    redirect_to client_path(@client)
+
+
+
     #respond_to do |format|
     #  if @client.update(client_params)
     #    format.html { redirect_to @client, notice: 'Client was successfully updated.' }

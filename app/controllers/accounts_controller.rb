@@ -60,9 +60,9 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
   def update
-    @account = Account.find_by_id(params[:id])
-    @account.name = params[:name]
-    @account.save
+    @account = Account.find(params[:id])
+    @account.update(name: params[:name])
+    redirect_to account_path(@account)
 
     #respond_to do |format|
     #  if @account.update(account_params)
