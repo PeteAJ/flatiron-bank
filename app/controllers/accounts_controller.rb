@@ -7,6 +7,7 @@ class AccountsController < ApplicationController
     #@accounts = Account.all
     if logged_in?
       @accounts = current_client.accounts
+      #@accounts = Accounts.all
     else
     end
   end
@@ -43,8 +44,12 @@ class AccountsController < ApplicationController
     @account = Account.create(account_params)
     @account.balance = params[:initial_deposit]
     @account.client_id = current_client.id
+    if @account.valid?
     @account.save
     redirect_to account_path(@account)
+  else
+    render :new
+  end
 
     #respond_to do |format|
     #  if @account.save
@@ -62,8 +67,11 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1.json
   def update
     @account = Account.find(params[:id])
+    if @account.valid?
     @account.update(account_params)
     redirect_to account_path(@account)
+    else
+    render :edit
 
     #respond_to do |format|
     #  if @account.update(account_params)

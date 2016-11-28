@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20161125232753) do
     t.boolean  "overdraft_protection", default: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.integer  "client_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -35,8 +34,6 @@ ActiveRecord::Schema.define(version: 20161125232753) do
     t.text    "description"
     t.integer "account_balance"
     t.integer "account_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
   end
 
 end
