@@ -4,23 +4,17 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    #@accounts = Account.all
-    if logged_in?
       @accounts = current_client.accounts
       #@accounts = Accounts.all
-    else
-    end
   end
 
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-    if logged_in?
       @account = Account.find_by_id(params[:id])
       @transactions = current_client.transactions
       if @account && @account.client == current_client
-    else
-      end
+        render :show
     end
   end
 
@@ -98,7 +92,6 @@ class AccountsController < ApplicationController
 
 
   def new_transaction
-    if logged_in?
     account = Account.find_by_id(params[:id])
     if account.client == current_client
       #transaction = account.transactions.create(description: params[:transaction_type], amount: params[:transaction_amount])
@@ -118,13 +111,10 @@ class AccountsController < ApplicationController
           new_balance = account.balance + params[:transaction_amount].to_i
         end
         account.update(balance: new_balance)
-    else
-    end
     end
     end
 
   def transfer
-    if logged_in?
     origin_account = current_client.accounts.find_by(name: params[:account_from_name])
     destination_account = current_client.accounts.find_by(name: params[:account_to_name])
 
@@ -142,12 +132,9 @@ class AccountsController < ApplicationController
     else
       flash[:notice] = "*transaction not completed. please enter valid account names.*"
     end
-    else
-    end
     end
 
   def outside_transfer
-      if logged_in?
         origin_account = current_client.accounts.find_by(name: params[:account_from_name])
         client = Client.find_by_email(params[:account_to_email])
         destination_account = client.accounts.find_by(name: params[:account_to_name])
@@ -163,8 +150,6 @@ class AccountsController < ApplicationController
       flash[:notice] = "*transaction successful*"
     else
       flash[:notice] = "*transaction not completed. please enter valid account name and email for the user you would like to transfer money to.*"
-    end
-    else
     end
     end
 

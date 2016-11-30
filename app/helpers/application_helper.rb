@@ -24,4 +24,8 @@ module ApplicationHelper
           session.clear
         end
 
+        def require_login
+          return head(:forbidden) unless session.include? :client_id
+        end
+
 end
