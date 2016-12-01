@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     flash[:notice] = "Please enter name, email and password."
     render "signup"
     end
-      end
+
     end
 
 
@@ -30,13 +30,10 @@ class SessionsController < ApplicationController
     params[:email].empty? || params[:password].empty?
 
     client = Client.find_by_email(params[:email])
-    if client && client.authenticate(params[:password])
+    return head(:forbidden) unless client.authenticate(params[:password])
     session[:client_id] = client.id
     redirect_to client_path
-    else
-    flash[:notice] = "Please enter email and password."
-    redirect_to '/login'
-      end
+    end
     end
 
 

@@ -2,8 +2,8 @@
 
 <%= form_tag clients_path do %>
   <h4><%=flash[:notice]%></h4>
-  Email: <br/><%= text_field_tag :'email' %><br>
-  Password:<br/><%= text_field_tag :'password' %>
+  Email: <br/><%= text_field_tag :email %><br>
+  Password:<br/><%= text_field_tag :password %>
   <br/>
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   <%= submit_tag "Sign In" %>
