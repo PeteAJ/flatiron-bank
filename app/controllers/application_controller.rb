@@ -6,13 +6,12 @@ class ApplicationController < ActionController::Base
   helper_method :logout
   helper_method :require_login
 
-  before_action :require_login
+
 
 
 
 
 def index
-  render '/'
 end
 
 def logged_in?
