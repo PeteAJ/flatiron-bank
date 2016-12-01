@@ -1,11 +1,12 @@
 module ApplicationHelper
 
         def logged_in?
-          !!current_client
+          session[:client_id]
         end
 
         def current_client
-          @current_client ||= Client.find_by_id(session[:client_id])
+        Client.find(session[:client_id])
+        helper_method :current_client
         end
 
         def validate_overdraft_transaction(origin_account, new_balance, account_id=nil)
