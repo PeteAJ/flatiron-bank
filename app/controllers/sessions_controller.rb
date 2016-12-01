@@ -34,7 +34,6 @@ class SessionsController < ApplicationController
     session[:client_id] = client.id
     redirect_to client_path
     end
-    end
 
 
 

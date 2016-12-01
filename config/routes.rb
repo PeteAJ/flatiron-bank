@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  root 'application#index', as: 'index'
-resources :accounts, only: [:index, :show, :new, :edit, :create]
-resources :clients, only: [:index, :show, :new, :edit, :create]
+root 'application#index'
+
+resources :accounts, only: [:index, :show, :new, :edit, :create, :update]
+resources :clients, only: [:index, :show, :new, :edit, :create, :update]
 
 get 'signup', to: 'sessions#signup'
 get 'login', to: 'sessions#login'

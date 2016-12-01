@@ -44,15 +44,15 @@
 <%= form_tag("/accounts/transfer") do %>
 <%= label_tag "transfer_from", "Transfer From" %>
 <br/>
-Account from Name: <br/><%= text_field_tag "account_from_name" %><br/>
+Account from Name: <br/><%= text_field_tag "account_from_name", :placeholder => "from"  %><br/>
 <br/>
 <%= label_tag "transfer_to", "Transfer To" %>
 <br/>
-Account to Name: <br/><%= text_field_tag "account_to_name" %><br/>
+Account to Name: <br/><%= text_field_tag "account_to_name", :placeholder => "to"  %><br/>
 <br/>
 <%= label_tag "amount", "Amount" %>
 <br/>
-Amount to Transfer: <br/><%= number_field_tag "transaction_amount" %><br/>
+Amount to Transfer: <br/><%= number_field_tag "transaction_amount", :placeholder => "amount"  %><br/>
 
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 <%= submit_tag "Transfer" %>
@@ -68,19 +68,19 @@ Amount to Transfer: <br/><%= number_field_tag "transaction_amount" %><br/>
 <h3>Transfer to Another Bank Account Holder</h3>
 <%= label_tag "transfer_from", "Transfer From" %>
 <br/>
-Account from Name: <br/><%= text_field_tag "account_from_name" %><br/>
+Account from Name: <br/><%= text_field_tag "account_from_name", :placeholder => "from"  %><br/>
 <br/>
 <%= label_tag "transfer_to_email", "Transfer To Email" %>
 <br/>
-Email of the Account Holder You'd Like to Transfer to: <br/><%= text_field_tag "account_to_email" %><br/>
+Email of the Account Holder You'd Like to Transfer to: <br/><%= text_field_tag "account_to_email", :placeholder => "to email"  %><br/>
 <br/>
 <%= label_tag "transfer_to_account_name", "Transfer To Account Name" %>
 <br/>
-Name of the Outside Account You'd Like to Transfer to: <br/><%= text_field_tag "account_to_name" %><br/>
+Name of the Outside Account You'd Like to Transfer to: <br/><%= text_field_tag "account_to_name", :placeholder => "to account"  %><br/>
 <br/>
 <%= label_tag "amount", "Amount" %>
 <br/>
-Amount to Transfer: <br/><%= number_field_tag "transaction_amount" %><br/>
+Amount to Transfer: <br/><%= number_field_tag "transaction_amount", :placeholder => "amount"  %><br/>
 
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 <%= submit_tag "Transfer" %>
