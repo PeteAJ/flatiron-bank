@@ -50,11 +50,8 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1.json
   def update
     @client = Client.find(params[:id])
-    if @client.valid?
     @client.update(client_params)
     redirect_to client_path(@client)
-    else
-    render :edit
     end
 
 
@@ -68,7 +65,7 @@ class ClientsController < ApplicationController
     #    format.json { render json: @client.errors, status: :unprocessable_entity }
     #  end
     #end
-  end
+
 
 
   private

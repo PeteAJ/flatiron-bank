@@ -8,6 +8,9 @@ resources :clients, only: [:index, :show, :new, :edit, :create, :update]
 get 'signup', to: 'sessions#signup'
 get 'login', to: 'sessions#login'
 
+post 'signup', to: 'sessions#login'
+post 'login', to: 'clients#index'
+
 post '/clients/:id', to: 'sessions#registrations', as: 'signed-up'
 post '/clients/:id', to: 'sessions#sessions', as: 'logged-in'
 
