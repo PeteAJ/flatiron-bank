@@ -1,5 +1,7 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:index, :show, :new, :edit, :update]
+  before_action :set_client, except: [:create, :index, :new]
+  before_action :authenticate_user!, except: [:create, :new]
+  before_action :admin_only, only: :destroy
   # GET /clients
   # GET /clients.json
   def index
@@ -9,28 +11,30 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
-    @client = Client.find_by_id(params[:id])
-    if params[:account]
-    @account = Account.find_by_id(params[:account][:id])
+    current_client == current_user
+    unless current_user.admin?
+    unless @client == current_user
+      redirect_to :back, :alert => "Access denied."
     end
+  end
+
   end
 
   # GET /clients/new
   def new
-    @client = Client.new
   end
 
   # GET /clients/1/edit
   def edit
-      @client = Client.find_by_id(params[:id])
   end
 
   # POST /clients
   # POST /clients.json
   def create
-    @client = Client.new(client_params)
-    @client.save
-    redirect_to client_path(@client)
+
+    @client = Client.find_or_initialize_by(email: params[:email])
+    @client.update(password: params[:password])
+    redirect_to client_path(id: @client.id)
   end
     #respond_to do |format|
     #  if @client.save
@@ -46,10 +50,12 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
-    @client = Client.find(params[:id])
-    @client.update(client_params)
-    redirect_to client_path(@client)
-    end
+    if @client.update_attributes(client_params)
+     redirect_to clients_path, :notice => "User updated."
+   else
+     redirect_to clients_path, :alert => "Unable to update user."
+   end
+ end
 
 
 
@@ -67,13 +73,21 @@ class ClientsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def admin_only
+      current_client == current_user
+      unless current_user.admin? || @client == current_user
+     redirect_to clients_path, :alert => "Access denied."
+   end
+  end
+
+
     def set_client
-      #@client = Client.find(params[:id])
+      @client = Client.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:name, :email, :password_digest, :password_confirmation)
+      params.require(:client).permit(:role)
 
     end
 end
