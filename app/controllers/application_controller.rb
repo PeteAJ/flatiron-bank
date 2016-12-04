@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
 
 def index
-  render '/sessions/signup'
+  render '/users/sign_in'
 end
 
 def logged_in?

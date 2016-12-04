@@ -16,11 +16,10 @@
   <nav>
        <a href="/"> Home </a>
      <% if logged_in? %>
-       <a href="/logout"> Log Out </a>
+       <%= link_to("Sign Out", destroy_user_session_path) %>
        <a href="/clients/<%=current_client.id%>"> Account Summary </a>
      <% else %>
-       <a href="/signup">Sign Up</a>
-       <a href="/login"> Sign In </a>
+     <%= link_to("Sign Up", new_user_registration_path) %>
      <%end %>
 
    </nav>
@@ -28,7 +27,9 @@
 <div>
 <%= yield %>
 </div>
-
+  <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+<%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <!--[if lt IE 7]>
   <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>

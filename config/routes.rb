@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-root 'application#index'
+devise_for :users
+
+
+devise_scope :user do
+  get "/" => "devise/sessions#new"
+end
 
 resources :accounts, only: [:index, :show, :new, :edit, :create, :update]
 resources :clients, only: [:index, :show, :new, :edit, :create, :update]
