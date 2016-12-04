@@ -1,6 +1,9 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  before_action :require_login
+  before_action :authenticate_user!
+  before_action :set_account, only: [:edit, :show, :update]
+  before_action :authorize_user!, only: [:edit, :update]
+
   # GET /accounts
   # GET /accounts.json
   def index
@@ -11,7 +14,6 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-      @account = Account.find_by_id(params[:id])
       @transactions = current_client.transactions
       if @account && @account.client == current_client
         render :show
@@ -25,7 +27,6 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
-      @account = Account.find_by_id(params[:id])
   end
 
   # POST /accounts
@@ -60,12 +61,9 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
   def update
-    @account = Account.find(params[:id])
-    if @account.valid?
     @account.update(account_params)
     redirect_to account_path(@account)
-    else
-    render :edit
+
 
     #respond_to do |format|
     #  if @account.update(account_params)
@@ -163,4 +161,14 @@ class AccountsController < ApplicationController
     def account_params
       params.require(:account).permit(:name, :balance, :overdraft_protection, :client_id)
     end
+
+    def authorize_user!
+      current_user == current_client
+    raise "Unauthorized!" unless current_user
+
+    unless current_user == @account.user || current_user.admin?
+      redirect_to post_path(id: @account.id), :alert => "Access denied."
+    end
+  end
+
 end
