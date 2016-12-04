@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: [:index, :show, :new, :edit, :update]
   # GET /clients
   # GET /clients.json
   def index
@@ -29,12 +29,9 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-    if @client.valid?
     @client.save
     redirect_to client_path(@client)
-    else
-    render :new
-    end
+  end
     #respond_to do |format|
     #  if @client.save
     #    format.html { redirect_to @client, notice: 'Client was successfully created.' }
@@ -44,7 +41,7 @@ class ClientsController < ApplicationController
     #    format.json { render json: @client.errors, status: :unprocessable_entity }
     #  end
     #end
-  end
+
 
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
