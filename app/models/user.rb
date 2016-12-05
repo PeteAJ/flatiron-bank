@@ -6,10 +6,13 @@ class User < ApplicationRecord
 
   enum role: [:user, :admin]
 
+  has_many  :accounts
+  has_many :transactions, through: :accounts
+
   after_initialize :set_default_role, :if => :new_record?
 
   def set_default_role
     self.role ||= :user
   end
-  
+
 end
