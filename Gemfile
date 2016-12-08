@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bcrypt'
 gem 'devise'
+gem 'omniauth'
 
 
 group :development, :test do

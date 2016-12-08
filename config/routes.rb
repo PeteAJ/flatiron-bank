@@ -1,24 +1,19 @@
 Rails.application.routes.draw do
 
-devise_for :users
+devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup'}, :controllers => { registrations: 'registrations', :omniauth_callbacks => "callbacks" }
 
 
 devise_scope :user do
   get "/" => "devise/sessions#new"
 end
 
+
+devise_scope :user do
+  root to: "users/sessions#new"
+end
+
 resources :accounts, only: [:index, :show, :new, :edit, :create, :update]
 resources :clients, only: [:index, :show, :new, :edit, :create, :update]
 
-get 'signup', to: 'sessions#signup'
-get 'login', to: 'sessions#login'
 
-post 'signup', to: 'sessions#login'
-post 'login', to: 'clients#index'
-
-post '/clients/:id', to: 'sessions#registrations', as: 'signed-up'
-post '/clients/:id', to: 'sessions#sessions', as: 'logged-in'
-
-patch 'accounts/:id', to: 'accounts#update'
-patch 'clients/:id', to: 'clients#update'
 end

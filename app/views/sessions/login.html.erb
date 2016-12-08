@@ -1,0 +1,12 @@
+<h2>Please sign in using the form below:</h2>
+
+<%= form_for(@client_id) do |f|%>
+<label>Email:</label><br>
+<%= f.text_field :email %><br>
+
+<label>Password:</label><br>
+<%= f.text_field :password %><br>
+
+<%= f.submit %>
+
+<% end %>
