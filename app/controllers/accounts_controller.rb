@@ -1,7 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
-  before_action :set_account, only: [:edit, :show, :update]
+  before_action :authenticate_user
   before_action :authorize_user!, only: [:edit, :update]
 
   # GET /accounts
@@ -169,6 +168,12 @@ class AccountsController < ApplicationController
     unless current_user == @account.user || current_user.admin?
       redirect_to post_path(id: @account.id), :alert => "Access denied."
     end
+  end
+
+  def current_client
+    current_client.id == :client_id
+  Client.find(session[:client_id])
+  helper_method :current_client
   end
 
 end

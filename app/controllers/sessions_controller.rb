@@ -23,7 +23,9 @@ class SessionsController < ApplicationController
     end
 
 
-
+    def logged_in?
+      !!current_client
+    end
 
     def login
    end

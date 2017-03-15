@@ -15,14 +15,7 @@ def index
   render '/users/sign_in'
 end
 
-def logged_in?
-  session[:client_id]
-end
 
-def current_client
-Client.find(session[:client_id])
-helper_method :current_client
-end
 
 def validate_overdraft_transaction(origin_account, new_balance, account_id=nil)
   if !origin_account.overdraft_protection && new_balance < 0
@@ -44,5 +37,19 @@ def require_login
   return head(:forbidden) unless session.include? :client_id
 end
 
+private
+  def logged_in?
+    !!current_user
+  end
+
+  def current_client
+    @current_client ||= Client.find_by_id(session[:client_id]) if session[:client_id] != nil
+  end
+
+  def authenticate_user
+    if !logged_in?
+      redirect_to new_client_signup_path
+    end
+  end
 
 end

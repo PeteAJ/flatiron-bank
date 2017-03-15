@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
-  before_action :set_client, except: [:create, :index, :new]
-  before_action :authenticate_user!, except: [:create, :new]
-  before_action :admin_only, only: :destroy
+  #before_action :set_client, except: [:create, :index, :new]
+  #before_action :authenticate_user!
+  #before_action :admin_only, only: :destroy
   # GET /clients
   # GET /clients.json
   def index
