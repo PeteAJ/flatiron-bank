@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :validate_overdraft_transaction
   helper_method :logout
   helper_method :require_login
+  before_filter :authenticate_user!
 
 
 
